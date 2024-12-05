@@ -6,6 +6,7 @@
 
 namespace Microsoft.PowerBI.Api.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -48,7 +49,18 @@ namespace Microsoft.PowerBI.Api.Models
         /// <param name="effectiveDate">If an incremental refresh policy is
         /// applied, the `effectiveDate` parameter overrides the current
         /// date.</param>
-        public DatasetRefreshRequest(NotifyOption notifyOption, DatasetRefreshType? type = default(DatasetRefreshType?), DatasetCommitMode? commitMode = default(DatasetCommitMode?), int? maxParallelism = default(int?), int? retryCount = default(int?), IList<DatasetRefreshObjects> objects = default(IList<DatasetRefreshObjects>), bool? applyRefreshPolicy = default(bool?), System.DateTime? effectiveDate = default(System.DateTime?))
+        /// <param name="timeout">If a `timeout` is specified, each data
+        /// refresh attempt on the semantic model will adhere to that timeout.
+        /// Note that a single refresh request can include multiple attempts if
+        /// `retryCount` is specified, which may cause the total refresh
+        /// duration to exceed the specified timeout. For instance, setting a
+        /// `timeout` of 1 hour with a `retryCount` of 2 could result in a
+        /// total refresh duration of up to 3 hours. Users can adjust the
+        /// `timeout` to shorten the refresh duration for faster failure
+        /// detection or extend it beyond the default 5 hours for more complex
+        /// data refreshes. However, the total refresh duration, including
+        /// retries, cannot exceed 24 hours.</param>
+        public DatasetRefreshRequest(NotifyOption notifyOption, DatasetRefreshType? type = default(DatasetRefreshType?), DatasetCommitMode? commitMode = default(DatasetCommitMode?), int? maxParallelism = default(int?), int? retryCount = default(int?), IList<DatasetRefreshObjects> objects = default(IList<DatasetRefreshObjects>), bool? applyRefreshPolicy = default(bool?), System.DateTime? effectiveDate = default(System.DateTime?), string timeout = default(string))
         {
             NotifyOption = notifyOption;
             Type = type;
@@ -58,6 +70,7 @@ namespace Microsoft.PowerBI.Api.Models
             Objects = objects;
             ApplyRefreshPolicy = applyRefreshPolicy;
             EffectiveDate = effectiveDate;
+            Timeout = timeout;
             CustomInit();
         }
 
@@ -126,13 +139,36 @@ namespace Microsoft.PowerBI.Api.Models
         public System.DateTime? EffectiveDate { get; set; }
 
         /// <summary>
+        /// Gets or sets if a `timeout` is specified, each data refresh attempt
+        /// on the semantic model will adhere to that timeout. Note that a
+        /// single refresh request can include multiple attempts if
+        /// `retryCount` is specified, which may cause the total refresh
+        /// duration to exceed the specified timeout. For instance, setting a
+        /// `timeout` of 1 hour with a `retryCount` of 2 could result in a
+        /// total refresh duration of up to 3 hours. Users can adjust the
+        /// `timeout` to shorten the refresh duration for faster failure
+        /// detection or extend it beyond the default 5 hours for more complex
+        /// data refreshes. However, the total refresh duration, including
+        /// retries, cannot exceed 24 hours.
+        /// </summary>
+        [JsonProperty(PropertyName = "timeout")]
+        public string Timeout { get; set; }
+
+        /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
+            if (Timeout != null)
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(Timeout, "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"))
+                {
+                    throw new ValidationException(ValidationRules.Pattern, "Timeout", "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$");
+                }
+            }
         }
     }
 }
