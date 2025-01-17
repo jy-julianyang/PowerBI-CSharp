@@ -1,4 +1,4 @@
-namespace Microsoft.PowerBI.Api.Models
+ï»¿namespace Microsoft.PowerBI.Api.Models
 {
     using System;
 
@@ -19,7 +19,7 @@ namespace Microsoft.PowerBI.Api.Models
         /// rules</param>
         /// <param name="lifetimeInMinutes">The maximum lifetime of the token
         /// in minutes, starting from the time it was generated. Can be used to
-        /// shorten the token’s expiration time, but not to extend it. The
+        /// shorten the tokenâ€™s expiration time, but not to extend it. The
         /// value must be a positive integer. Zero (0) is equivalent to null
         /// and will be ignored, resulting in the default expiration
         /// time.</param>
@@ -30,7 +30,6 @@ namespace Microsoft.PowerBI.Api.Models
             AllowSaveAs = allowSaveAs;
             Identities = new[] { identity };
             LifetimeInMinutes = lifetimeInMinutes;
-            CustomInit();
         }
 
         /// <summary>
@@ -44,7 +43,7 @@ namespace Microsoft.PowerBI.Api.Models
         /// rules</param>
         /// <param name="lifetimeInMinutes">The maximum lifetime of the token
         /// in minutes, starting from the time it was generated. Can be used to
-        /// shorten the token’s expiration time, but not to extend it. The
+        /// shorten the tokenâ€™s expiration time, but not to extend it. The
         /// value must be a positive integer. Zero (0) is equivalent to null
         /// and will be ignored, resulting in the default expiration
         /// time.</param>
@@ -55,7 +54,6 @@ namespace Microsoft.PowerBI.Api.Models
             AllowSaveAs = allowSaveAs;
             Identities = new[] { identity };
             LifetimeInMinutes = lifetimeInMinutes;
-            CustomInit();
         }
 
         /// <summary>
@@ -72,7 +70,6 @@ namespace Microsoft.PowerBI.Api.Models
             DatasetId = datasetId;
             AllowSaveAs = null;
             Identities = new[] { identity };
-            CustomInit();
         }
 
         /// <summary>
@@ -88,7 +85,6 @@ namespace Microsoft.PowerBI.Api.Models
             DatasetId = null;
             AllowSaveAs = null;
             Identities = new[] { identity };
-            CustomInit();
         }
     }
 }

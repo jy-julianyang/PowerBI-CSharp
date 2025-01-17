@@ -4,16 +4,28 @@ using System.Security.Cryptography;
 namespace Microsoft.PowerBI.Api.Extensions
 {
     using System.Security.Cryptography;
+    /// <summary>
+    /// Represents the lengths of encryption keys.
+    /// </summary>
     public enum KeyLengths : byte
     {
+        /// <summary>
+        /// Represents a key length of 32 bytes.
+        /// </summary>
         KeyLength32,
+
+        /// <summary>
+        /// Represents a key length of 64 bytes.
+        /// </summary>
         KeyLength64
     }
 
+    /// <summary>
+    /// Provides helper methods for asymmetric higher key encryption.
+    /// </summary>
     public static class AsymmetricHigherKeyEncryptionHelper
     {
         private static int KEY_LENGTHS_PREFIX = 2;
-        private static int MIN_HMAC_KEY_SIZE_BYTES = 32;
         private static int HMAC_KEY_SIZE_BYTES = 64;
         private static int AES_KEY_SIZE_BYTES = 32;
 

@@ -1,9 +1,8 @@
 ﻿namespace Microsoft.PowerBI.Api.Models.Credentials
 {
-    using Microsoft.Rest;
 
     /// <summary>
-    /// Key based datasource credentials 
+    /// Key based datasource credentials
     /// </summary>
     public class KeyCredentials : CredentialsBase
     {
@@ -17,10 +16,7 @@
         /// <param name="key">The key</param>
         public KeyCredentials(string key)
         {
-            if (string.IsNullOrEmpty(key))
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, KEY);
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             this.CredentialData[KEY] = key;
         }

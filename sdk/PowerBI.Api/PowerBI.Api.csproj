@@ -1,9 +1,14 @@
-﻿<Project Sdk="Microsoft.Net.Sdk">
-  
+<Project Sdk="Microsoft.Net.Sdk">
+
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
     <ProjectGuid>{1EE969AD-7923-4855-AACA-2A1B790BB0F1}</ProjectGuid>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <LangVersion>11.0</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Nullable>annotations</Nullable>
+    <IncludeGeneratorSharedCode>true</IncludeGeneratorSharedCode>
+    <RestoreAdditionalProjectSources>https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json</RestoreAdditionalProjectSources>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net48'">
@@ -17,8 +22,8 @@
   </PropertyGroup>
   <PropertyGroup>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageIconUrl>http://go.microsoft.com/fwlink/?LinkId=780675</PackageIconUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</PackageLicenseUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/Microsoft/PowerBI-CSharp</PackageProjectUrl>
     <RootNamespace>Microsoft.PowerBI.Api</RootNamespace>
     <AssemblyName>Microsoft.PowerBI.Api</AssemblyName>
@@ -45,26 +50,25 @@
     <None Include="PowerBI.Api.nuspec">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="..\..\resources\icon.png" Pack="true" PackagePath="" />
+    <None Include="..\..\license.txt" Pack="true" PackagePath="" />
   </ItemGroup>
-  
+
   <!--.NETstandard Properties-->
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.24" />
     <PackageReference Include="System.Security.Cryptography.Cng" Version="4.7.0" />
   </ItemGroup>
-  
 
   <!--.net48 Properties-->
-  <!--Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"-->  
+  <!--Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"-->
   <ItemGroup Condition=" '$(TargetFramework)' == 'net48' ">
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.21" />
-  </ItemGroup>  
+  </ItemGroup>
  <ItemGroup>
     <Folder Include="Properties\" />
-  </ItemGroup>  
-  
+  </ItemGroup>
+
   <!--Shared Properties-->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -99,7 +103,14 @@
     <Compile Include="..\..\.version\PipelineAssemblyInfo.cs">
       <Link>PipelineAssemblyInfo.cs</Link>
     </Compile>
-  </ItemGroup>  
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Azure.Core" Version="1.44.1" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.23.0" />
+    <PackageReference Include="Microsoft.Azure.AutoRest.CSharp" Version="3.0.0-beta.20240325.4" PrivateAssets="All" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="8.0.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.2" />
+  </ItemGroup>
 
   <PropertyGroup Condition=" '$(CdpxPostSigning)' == 'true' ">
     <IsCleaning>false</IsCleaning>
@@ -107,7 +118,7 @@
     <AddRoleContentDependsOn />
   </PropertyGroup>
   <!-- <Import Condition=" '$(TargetFramework)' == 'net48'" Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" /> -->
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

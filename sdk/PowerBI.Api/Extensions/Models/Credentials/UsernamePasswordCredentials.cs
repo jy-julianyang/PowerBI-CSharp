@@ -1,9 +1,7 @@
 ﻿namespace Microsoft.PowerBI.Api.Models.Credentials
 {
-    using Microsoft.Rest;
-
     /// <summary>
-    /// Username and Password based datasource credentials 
+    /// Username and Password based datasource credentials
     /// </summary>
     public abstract class UsernamePasswordCredentials : CredentialsBase
     {
@@ -17,15 +15,8 @@
         /// <param name="password">The password</param>
         public UsernamePasswordCredentials(string username, string password)
         {
-            if (string.IsNullOrEmpty(username))
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, USERNAME);
-            }
-
-            if (string.IsNullOrEmpty(password))
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, PASSWORD);
-            }
+            Argument.AssertNotNullOrEmpty(username, nameof(username));
+            Argument.AssertNotNullOrEmpty(password, nameof(password));
 
             this.CredentialData[USERNAME] = username;
             this.CredentialData[PASSWORD] = password;

@@ -24,7 +24,7 @@ variables:
   OUTPUTROOT: $(REPOROOT)\out
   NUGET_XMLDOC_MODE: skip
 
-  WindowsContainerImage: 'onebranch.azurecr.io/windows/ltsc2019/vse2019:latest' # Docker image which is used to build the project https://aka.ms/obpipelines/containers
+  WindowsContainerImage: 'onebranch.azurecr.io/windows/ltsc2019/vse2022:latest' # Docker image which is used to build the project https://aka.ms/obpipelines/containers
 
 resources:
   repositories:
@@ -76,7 +76,7 @@ extends:
           - task: UseDotNet@2
             inputs:
               packageType: 'sdk'
-              version: '3.1.403' #add the version which is required.
+              version: '7.0.305' #add the version which is required.
               installationPath: 'C:\Program Files\dotnet\' #this is to ensure that we are installing the dotnet at the same location as container by default install the dotnet sdks.
 
           - task: CmdLine@2
