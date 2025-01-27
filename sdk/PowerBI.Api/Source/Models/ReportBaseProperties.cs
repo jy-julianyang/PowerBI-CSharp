@@ -27,7 +27,7 @@ namespace Microsoft.PowerBI.Api.Models
         /// <param name="description"> The report description. </param>
         /// <param name="reportType"> The report type. </param>
         /// <param name="originalReportId"> The actual report ID when the workspace is published as an app. </param>
-        /// <param name="isOwnedByMe"> Determine if the report is created by the current user. </param>
+        /// <param name="isOwnedByMe"> Indicates whether the current user has the ability to either modify or create a copy of the report. </param>
         internal ReportBaseProperties(Guid id, string name, string datasetId, string appId, string description, ReportBasePropertiesReportType? reportType, Guid? originalReportId, bool? isOwnedByMe)
         {
             Id = id;
@@ -54,7 +54,7 @@ namespace Microsoft.PowerBI.Api.Models
         public ReportBasePropertiesReportType? ReportType { get; set; }
         /// <summary> The actual report ID when the workspace is published as an app. </summary>
         public Guid? OriginalReportId { get; set; }
-        /// <summary> Determine if the report is created by the current user. </summary>
+        /// <summary> Indicates whether the current user has the ability to either modify or create a copy of the report. </summary>
         public bool? IsOwnedByMe { get; set; }
     }
 }

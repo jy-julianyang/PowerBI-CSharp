@@ -29,7 +29,7 @@ namespace Microsoft.PowerBI.Api.Models
         /// <param name="description"> The report description. </param>
         /// <param name="reportType"> The report type. </param>
         /// <param name="originalReportId"> The actual report ID when the workspace is published as an app. </param>
-        /// <param name="isOwnedByMe"> Determine if the report is created by the current user. </param>
+        /// <param name="isOwnedByMe"> Indicates whether the current user has the ability to either modify or create a copy of the report. </param>
         /// <param name="webUrl"> The web URL of the report. </param>
         /// <param name="embedUrl"> The embed URL of the report. </param>
         /// <param name="createdBy"> The report owner. Available only for reports created after June 2019. </param>

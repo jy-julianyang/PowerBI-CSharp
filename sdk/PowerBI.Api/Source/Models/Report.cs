@@ -29,7 +29,7 @@ namespace Microsoft.PowerBI.Api.Models
         /// <param name="description"> The report description. </param>
         /// <param name="reportType"> The report type. </param>
         /// <param name="originalReportId"> The actual report ID when the workspace is published as an app. </param>
-        /// <param name="isOwnedByMe"> Determine if the report is created by the current user. </param>
+        /// <param name="isOwnedByMe"> Indicates whether the current user has the ability to either modify or create a copy of the report. </param>
         /// <param name="webUrl"> The web URL of the report. </param>
         /// <param name="embedUrl"> The embed URL of the report. </param>
         /// <param name="users"> (Empty value) The user access details for a Power BI report. This property will be removed from the payload response in an upcoming release. You can retrieve user information on a Power BI report by using the [Get Report Users as Admin](/rest/api/power-bi/admin/reports-get-report-users-as-admin) API call, or the [PostWorkspaceInfo](/rest/api/power-bi/admin/workspace-info-post-workspace-info) API call with the `getArtifactUsers` parameter. </param>

@@ -24178,7 +24178,7 @@
                 },
                 "isOwnedByMe": {
                     "type": "boolean",
-                    "description": "Determine if the report is created by the current user."
+                    "description": "Indicates whether the current user has the ability to either modify or create a copy of the report."
                 }
             }
         },
