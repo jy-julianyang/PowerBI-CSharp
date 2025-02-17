@@ -29,7 +29,7 @@ namespace Microsoft.PowerBI.Api.Models
         /// <param name="name"> The dataset name. </param>
         /// <param name="configuredBy"> The dataset owner. </param>
         /// <param name="createdDate"> The dataset creation date and time. </param>
-        /// <param name="contentProviderType"> The content provider type for the dataset. </param>
+        /// <param name="contentProviderType"> A deprecated property that should be ignored. </param>
         /// <param name="description"> The dataset description. </param>
         /// <param name="upstreamDataflows"> The list of all the dataflows this item depends on. </param>
         internal DatasetBaseProperties(string id, string name, string configuredBy, DateTimeOffset? createdDate, string contentProviderType, string description, IList<DependentDataflow> upstreamDataflows)
@@ -51,7 +51,7 @@ namespace Microsoft.PowerBI.Api.Models
         public string ConfiguredBy { get; set; }
         /// <summary> The dataset creation date and time. </summary>
         public DateTimeOffset? CreatedDate { get; set; }
-        /// <summary> The content provider type for the dataset. </summary>
+        /// <summary> A deprecated property that should be ignored. </summary>
         public string ContentProviderType { get; set; }
         /// <summary> The dataset description. </summary>
         public string Description { get; set; }

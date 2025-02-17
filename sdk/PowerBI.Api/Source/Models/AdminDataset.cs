@@ -28,7 +28,7 @@ namespace Microsoft.PowerBI.Api.Models
         /// <param name="name"> The dataset name. </param>
         /// <param name="configuredBy"> The dataset owner. </param>
         /// <param name="createdDate"> The dataset creation date and time. </param>
-        /// <param name="contentProviderType"> The content provider type for the dataset. </param>
+        /// <param name="contentProviderType"> A deprecated property that should be ignored. </param>
         /// <param name="description"> The dataset description. </param>
         /// <param name="upstreamDataflows"> The list of all the dataflows this item depends on. </param>
         /// <param name="queryScaleOutSettings"> Query scale-out settings of a dataset. </param>

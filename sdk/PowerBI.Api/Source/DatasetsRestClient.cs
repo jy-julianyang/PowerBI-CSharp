@@ -497,7 +497,7 @@ namespace Microsoft.PowerBI.Api
         /// - Maximum of 15MB of data per query. Once 15MB is exceeded, the current row will be completed but no additional rows will be written.
         /// - There's a limit of 120 query requests per minute per user, regardless of the dataset that's queried.
         /// - To use Service Principals, make sure the admin tenant setting [_Allow service principals to use Power BI APIs_](/power-bi/admin/service-admin-portal-developer#allow-service-principals-to-use-power-bi-apis) under _Developer settings_ is enabled. However, regardless of the admin tenant setting, Service Principals aren't supported for datasets with RLS per [RLS limitations](/power-bi/admin/service-admin-rls#considerations-and-limitations) or datasets with SSO enabled.
-        /// - Only DAX queries are supported at this time. MDX and DMV queries are not supported.
+        /// - Only DAX queries are supported at this time. MDX, INFO functions and DMV queries are not supported.
         /// &lt;br&gt;&lt;br&gt;
         /// </remarks>
         public async Task<Response<DatasetExecuteQueriesResponse>> ExecuteQueriesAsync(string datasetId, DatasetExecuteQueriesRequest requestMessage, CancellationToken cancellationToken = default)
@@ -565,7 +565,7 @@ namespace Microsoft.PowerBI.Api
         /// - Maximum of 15MB of data per query. Once 15MB is exceeded, the current row will be completed but no additional rows will be written.
         /// - There's a limit of 120 query requests per minute per user, regardless of the dataset that's queried.
         /// - To use Service Principals, make sure the admin tenant setting [_Allow service principals to use Power BI APIs_](/power-bi/admin/service-admin-portal-developer#allow-service-principals-to-use-power-bi-apis) under _Developer settings_ is enabled. However, regardless of the admin tenant setting, Service Principals aren't supported for datasets with RLS per [RLS limitations](/power-bi/admin/service-admin-rls#considerations-and-limitations) or datasets with SSO enabled.
-        /// - Only DAX queries are supported at this time. MDX and DMV queries are not supported.
+        /// - Only DAX queries are supported at this time. MDX, INFO functions and DMV queries are not supported.
         /// &lt;br&gt;&lt;br&gt;
         /// </remarks>
         public Response<DatasetExecuteQueriesResponse> ExecuteQueries(string datasetId, DatasetExecuteQueriesRequest requestMessage, CancellationToken cancellationToken = default)
@@ -6028,7 +6028,7 @@ namespace Microsoft.PowerBI.Api
         /// - Maximum of 15MB of data per query. Once 15MB is exceeded, the current row will be completed but no additional rows will be written.
         /// - There's a limit of 120 query requests per minute per user, regardless of the dataset that's queried.
         /// - To use Service Principals, make sure the admin tenant setting [_Allow service principals to use Power BI APIs_](/power-bi/admin/service-admin-portal-developer#allow-service-principals-to-use-power-bi-apis) under _Developer settings_ is enabled. However, regardless of the admin tenant setting, Service Principals aren't supported for datasets with RLS per [RLS limitations](/power-bi/admin/service-admin-rls#considerations-and-limitations) or datasets with SSO enabled.
-        /// - Only DAX queries are supported at this time. MDX and DMV queries are not supported.
+        /// - Only DAX queries are supported at this time. MDX, INFO functions and DMV queries are not supported.
         /// &lt;br&gt;&lt;br&gt;
         /// </remarks>
         public async Task<Response<DatasetExecuteQueriesResponse>> ExecuteQueriesInGroupAsync(Guid groupId, string datasetId, DatasetExecuteQueriesRequest requestMessage, CancellationToken cancellationToken = default)
@@ -6097,7 +6097,7 @@ namespace Microsoft.PowerBI.Api
         /// - Maximum of 15MB of data per query. Once 15MB is exceeded, the current row will be completed but no additional rows will be written.
         /// - There's a limit of 120 query requests per minute per user, regardless of the dataset that's queried.
         /// - To use Service Principals, make sure the admin tenant setting [_Allow service principals to use Power BI APIs_](/power-bi/admin/service-admin-portal-developer#allow-service-principals-to-use-power-bi-apis) under _Developer settings_ is enabled. However, regardless of the admin tenant setting, Service Principals aren't supported for datasets with RLS per [RLS limitations](/power-bi/admin/service-admin-rls#considerations-and-limitations) or datasets with SSO enabled.
-        /// - Only DAX queries are supported at this time. MDX and DMV queries are not supported.
+        /// - Only DAX queries are supported at this time. MDX, INFO functions and DMV queries are not supported.
         /// &lt;br&gt;&lt;br&gt;
         /// </remarks>
         public Response<DatasetExecuteQueriesResponse> ExecuteQueriesInGroup(Guid groupId, string datasetId, DatasetExecuteQueriesRequest requestMessage, CancellationToken cancellationToken = default)

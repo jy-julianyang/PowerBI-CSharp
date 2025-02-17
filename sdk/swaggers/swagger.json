@@ -22715,7 +22715,7 @@
                 },
                 "ContentProviderType": {
                     "type": "string",
-                    "description": "The content provider type for the dataset"
+                    "description": "A deprecated property that should be ignored."
                 },
                 "description": {
                     "type": "string",
