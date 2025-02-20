@@ -32,7 +32,7 @@ namespace Microsoft.PowerBI.Api
         /// <summary>
         /// Uploads a PBIX file to the MyWorkspace
         /// </summary>
-        /// <param name='file'></param>
+        /// <param name="file"> The PBIX file to import</param>
         /// <param name="datasetDisplayName"> The display name of the dataset, should include file extension. Not supported when importing from OneDrive for Business. </param>
         /// <param name="nameConflict"> Specifies what to do if a dataset with the same name already exists. The default value is `Ignore`. For RDL files, `Abort` and `Overwrite` are the only supported options. </param>
         /// <param name="skipReport"> Whether to skip report import. If specified, the value must be `true`. Only supported for Power BI .pbix files. </param>
@@ -40,8 +40,6 @@ namespace Microsoft.PowerBI.Api
         /// <param name="overrideModelLabel"> Whether to override the existing label on a model when republishing a Power BI .pbix file. The service default value is `true`. </param>
         /// <param name="subfolderObjectId"> The subfolder ID to import the file to subfolder. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// Optional cancellation token
-
         public virtual Response<Import> PostImportWithFile(Stream file, string datasetDisplayName, ImportConflictHandlerMode? nameConflict = null, bool? skipReport = null, bool? overrideReportLabel = null, bool? overrideModelLabel = null, Guid? subfolderObjectId = null, CancellationToken cancellationToken = default)
         {
             return PostImportWithFileAsyncInGroup(null, file, datasetDisplayName, nameConflict, skipReport, overrideReportLabel, overrideModelLabel, subfolderObjectId, cancellationToken).GetAwaiter().GetResult();
@@ -50,7 +48,7 @@ namespace Microsoft.PowerBI.Api
         /// <summary>
         /// Uploads a PBIX file to the MyWorkspace
         /// </summary>
-        /// <param name='file'>
+        /// <param name="file">The PBIX file to import</param>
         /// <param name="datasetDisplayName"> The display name of the dataset, should include file extension. Not supported when importing from OneDrive for Business. </param>
         /// <param name="nameConflict"> Specifies what to do if a dataset with the same name already exists. The default value is `Ignore`. For RDL files, `Abort` and `Overwrite` are the only supported options. </param>
         /// <param name="skipReport"> Whether to skip report import. If specified, the value must be `true`. Only supported for Power BI .pbix files. </param>
@@ -58,9 +56,6 @@ namespace Microsoft.PowerBI.Api
         /// <param name="overrideModelLabel"> Whether to override the existing label on a model when republishing a Power BI .pbix file. The service default value is `true`. </param>
         /// <param name="subfolderObjectId"> The subfolder ID to import the file to subfolder. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// Optional cancellation token
-        /// </param>
-
         public virtual async Task<Response<Import>> PostImportWithFileAsync(Stream file, string datasetDisplayName, ImportConflictHandlerMode? nameConflict = null, bool? skipReport = null, bool? overrideReportLabel = null, bool? overrideModelLabel = null, Guid? subfolderObjectId = null, CancellationToken cancellationToken = default)
         {
             return await PostImportWithFileAsyncInGroup(null, file, datasetDisplayName, nameConflict, skipReport, overrideReportLabel, overrideModelLabel, subfolderObjectId, cancellationToken);
@@ -69,7 +64,7 @@ namespace Microsoft.PowerBI.Api
         /// <summary>
         /// Uploads a PBIX file to the MyWorkspace
         /// </summary>
-        /// <param name='file'>
+        /// <param name="file">The PBIX file to import</param>
         /// <param name='groupId'>The group Id </param>
         /// <param name="datasetDisplayName"> The display name of the dataset, should include file extension. Not supported when importing from OneDrive for Business. </param>
         /// <param name="nameConflict"> Specifies what to do if a dataset with the same name already exists. The default value is `Ignore`. For RDL files, `Abort` and `Overwrite` are the only supported options. </param>
@@ -78,8 +73,6 @@ namespace Microsoft.PowerBI.Api
         /// <param name="overrideModelLabel"> Whether to override the existing label on a model when republishing a Power BI .pbix file. The service default value is `true`. </param>
         /// <param name="subfolderObjectId"> The subfolder ID to import the file to subfolder. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// Optional cancellation token
-        /// </param>
         public virtual Response<Import> PostImportWithFileInGroup(Guid? groupId, Stream file, string datasetDisplayName, ImportConflictHandlerMode? nameConflict = null, bool? skipReport = null, bool? overrideReportLabel = null, bool? overrideModelLabel = null, Guid? subfolderObjectId = null, CancellationToken cancellationToken = default)
         {
             return PostImportWithFileAsyncInGroup(groupId, file, datasetDisplayName, nameConflict, skipReport, overrideReportLabel, overrideModelLabel, subfolderObjectId, cancellationToken).GetAwaiter().GetResult();
@@ -87,7 +80,7 @@ namespace Microsoft.PowerBI.Api
         /// <summary>
         /// Uploads a PBIX file to the MyWorkspace
         /// </summary>
-        /// <param name='file'>
+        /// <param name="file">The PBIX file to import</param>
         /// <param name='groupId'>The group Id </param>
         /// <param name="datasetDisplayName"> The display name of the dataset, should include file extension. Not supported when importing from OneDrive for Business. </param>
         /// <param name="nameConflict"> Specifies what to do if a dataset with the same name already exists. The default value is `Ignore`. For RDL files, `Abort` and `Overwrite` are the only supported options. </param>
@@ -96,8 +89,6 @@ namespace Microsoft.PowerBI.Api
         /// <param name="overrideModelLabel"> Whether to override the existing label on a model when republishing a Power BI .pbix file. The service default value is `true`. </param>
         /// <param name="subfolderObjectId"> The subfolder ID to import the file to subfolder. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// Optional cancellation token
-        /// </param>
         public virtual async Task<Response<Import>> PostImportWithFileAsyncInGroup(Guid? groupId, Stream file, string datasetDisplayName, ImportConflictHandlerMode? nameConflict = null, bool? skipReport = null, bool? overrideReportLabel = null, bool? overrideModelLabel = null, Guid? subfolderObjectId = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImportsClient.PostImportWithFile");
@@ -125,7 +116,7 @@ namespace Microsoft.PowerBI.Api
         /// Uploads a PBIX file to the specified group
         /// </summary>
         /// <param name="groupId">The group Id</param>
-        /// <param name="file">The file to upload</param>
+        /// <param name="file">The PBIX file to import</param>
         /// <param name="datasetDisplayName">The display name of the dataset, should include file extension. Not supported when importing from OneDrive for Business.</param>
         /// <param name="nameConflict">Specifies what to do if a dataset with the same name already exists. The default value is `Ignore`. For RDL files, `Abort` and `Overwrite` are the only supported options.</param>
         /// <param name="skipReport">Whether to skip report import. If specified, the value must be `true`. Only supported for Power BI .pbix files.</param>
@@ -158,7 +149,7 @@ namespace Microsoft.PowerBI.Api
         /// Uploads a PBIX large file to the specified group
         /// </summary>
         /// <param name="groupId">The group Id</param>
-        /// <param name="file">The file to upload</param>
+        /// <param name="file">The PBIX file to import</param>
         /// <param name="datasetDisplayName">The display name of the dataset, should include file extension. Not supported when importing from OneDrive for Business.</param>
         /// <param name="nameConflict">Specifies what to do if a dataset with the same name already exists. The default value is `Ignore`. For RDL files, `Abort` and `Overwrite` are the only supported options.</param>
         /// <param name="skipReport">Whether to skip report import. If specified, the value must be `true`. Only supported for Power BI .pbix files.</param>

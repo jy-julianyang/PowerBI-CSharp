@@ -28,7 +28,7 @@
             AccessLevel = accessLevel;
             DatasetId = datasetId;
             AllowSaveAs = allowSaveAs;
-            Identities = new[] { identity };
+            Identities = identity != null ? new EffectiveIdentity[] { identity } : Array.Empty<EffectiveIdentity>();
             LifetimeInMinutes = lifetimeInMinutes;
         }
 
@@ -52,7 +52,7 @@
             AccessLevel = accessLevel;
             DatasetId = null;
             AllowSaveAs = allowSaveAs;
-            Identities = new[] { identity };
+            Identities = identity != null ? new EffectiveIdentity[] { identity } : Array.Empty<EffectiveIdentity>();
             LifetimeInMinutes = lifetimeInMinutes;
         }
 
@@ -69,7 +69,7 @@
             AccessLevel = accessLevel;
             DatasetId = datasetId;
             AllowSaveAs = null;
-            Identities = new[] { identity };
+            Identities = identity != null ? new EffectiveIdentity[] { identity } : Array.Empty<EffectiveIdentity>();
         }
 
         /// <summary>
@@ -84,7 +84,7 @@
             AccessLevel = accessLevel;
             DatasetId = null;
             AllowSaveAs = null;
-            Identities = new[] { identity };
+            Identities = identity != null ? new EffectiveIdentity[] { identity } : Array.Empty<EffectiveIdentity>();
         }
     }
 }

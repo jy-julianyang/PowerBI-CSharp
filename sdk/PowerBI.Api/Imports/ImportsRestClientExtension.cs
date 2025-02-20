@@ -26,7 +26,7 @@ namespace Microsoft.PowerBI.Api
         /// Uploads a PBIX file to the specified group
         /// </summary>
         /// <param name="groupId">The group Id</param>
-        /// <param name="file">The file to upload</param>
+        /// <param name="file">The PBIX file to import</param>
         /// <param name="datasetDisplayName">The display name of the dataset, should include file extension. Not supported when importing from OneDrive for Business.</param>
         /// <param name="nameConflict">Specifies what to do if a dataset with the same name already exists. The default value is `Ignore`. For RDL files, `Abort` and `Overwrite` are the only supported options.</param>
         /// <param name="skipReport">Whether to skip report import. If specified, the value must be `true`. Only supported for Power BI .pbix files.</param>
@@ -119,7 +119,7 @@ namespace Microsoft.PowerBI.Api
         /// Uploads a PBIX large file to the specified group
         /// </summary>
         /// <param name="groupId">The group Id</param>
-        /// <param name="file">The file to upload</param>
+        /// <param name="file">The PBIX file to import</param>
         /// <param name="datasetDisplayName">The display name of the dataset, should include file extension. Not supported when importing from OneDrive for Business.</param>
         /// <param name="client"> The Power BI Client</param>
         /// <param name="nameConflict">Specifies what to do if a dataset with the same name already exists. The default value is `Ignore`. For RDL files, `Abort` and `Overwrite` are the only supported options.</param>
@@ -173,7 +173,7 @@ namespace Microsoft.PowerBI.Api
         /// Uploads a file in chunks to an temporary upload location location using a block blob client.
         /// </summary>
         /// <param name="temporaryUploadLocationUrl"> The URL of the temporary upload location in Azure Blob Storage. </param>
-        /// <param name="file"> The stream representing the file to be uploaded.</param>
+        /// <param name="file">The PBIX file to import</param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         private async Task UploadFileToBlob(string temporaryUploadLocationUrl, Stream file, CancellationToken cancellationToken)
         {
