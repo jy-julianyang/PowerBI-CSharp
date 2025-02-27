@@ -1,0 +1,17 @@
+is_global = true
+
+# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/configuration-files#precedence
+
+global_level = -10
+
+dotnet_analyzer_diagnostic.category-documentation.severity = suggestion
+dotnet_analyzer_diagnostic.category-globalization.severity = suggestion
+dotnet_analyzer_diagnostic.category-interoperability.severity = suggestion
+dotnet_analyzer_diagnostic.category-maintainability.severity = suggestion
+dotnet_analyzer_diagnostic.category-naming.severity = suggestion
+dotnet_analyzer_diagnostic.category-performance.severity = suggestion
+dotnet_analyzer_diagnostic.category-singleFile.severity = suggestion
+dotnet_analyzer_diagnostic.category-reliability.severity = suggestion
+dotnet_analyzer_diagnostic.category-security.severity = error
+dotnet_analyzer_diagnostic.category-style.severity = suggestion
+dotnet_analyzer_diagnostic.category-usage.severity = suggestion
