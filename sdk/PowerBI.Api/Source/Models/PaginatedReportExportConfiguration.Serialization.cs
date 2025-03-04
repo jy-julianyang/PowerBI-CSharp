@@ -46,6 +46,11 @@ namespace Microsoft.PowerBI.Api.Models
                 }
                 writer.WriteEndArray();
             }
+            if (Optional.IsDefined(Locale))
+            {
+                writer.WritePropertyName("locale"u8);
+                writer.WriteStringValue(Locale);
+            }
             writer.WriteEndObject();
         }
 

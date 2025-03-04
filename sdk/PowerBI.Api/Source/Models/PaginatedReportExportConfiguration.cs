@@ -24,11 +24,13 @@ namespace Microsoft.PowerBI.Api.Models
         /// <param name="identities"> The single identity to use when exporting a report. Required when a report uses a Power BI dataset or an Azure Analysis Services data source. </param>
         /// <param name="formatSettings"> A dictionary of format settings. The keys are the device information property names for the requested file format. </param>
         /// <param name="parameterValues"> A list of report parameters. </param>
-        internal PaginatedReportExportConfiguration(IList<EffectiveIdentity> identities, IDictionary<string, string> formatSettings, IList<ParameterValue> parameterValues)
+        /// <param name="locale"> The locale to apply. </param>
+        internal PaginatedReportExportConfiguration(IList<EffectiveIdentity> identities, IDictionary<string, string> formatSettings, IList<ParameterValue> parameterValues, string locale)
         {
             Identities = identities;
             FormatSettings = formatSettings;
             ParameterValues = parameterValues;
+            Locale = locale;
         }
 
         /// <summary> The single identity to use when exporting a report. Required when a report uses a Power BI dataset or an Azure Analysis Services data source. </summary>
@@ -37,5 +39,7 @@ namespace Microsoft.PowerBI.Api.Models
         public IDictionary<string, string> FormatSettings { get; }
         /// <summary> A list of report parameters. </summary>
         public IList<ParameterValue> ParameterValues { get; }
+        /// <summary> The locale to apply. </summary>
+        public string Locale { get; set; }
     }
 }

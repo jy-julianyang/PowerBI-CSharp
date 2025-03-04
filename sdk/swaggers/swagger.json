@@ -27293,6 +27293,10 @@
                     "items": {
                         "$ref": "#/definitions/ParameterValue"
                     }
+                },
+                "locale": {
+                    "type": "string",
+                    "description": "The locale to apply"
                 }
             }
         },
