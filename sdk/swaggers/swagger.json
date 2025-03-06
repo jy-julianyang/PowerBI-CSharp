@@ -22676,11 +22676,11 @@
         "DatasetNavigationProperties": {
             "description": "A list of navigation related properties of a dataset.",
             "properties": {
-                "CreateReportEmbedURL": {
+                "createReportEmbedURL": {
                     "type": "string",
                     "description": "The dataset create report embed URL"
                 },
-                "QnaEmbedURL": {
+                "qnaEmbedURL": {
                     "type": "string",
                     "description": "The dataset Q&A embed URL"
                 },

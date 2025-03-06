@@ -18,12 +18,12 @@ namespace Microsoft.PowerBI.Api.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(CreateReportEmbedURL))
             {
-                writer.WritePropertyName("CreateReportEmbedURL"u8);
+                writer.WritePropertyName("createReportEmbedURL"u8);
                 writer.WriteStringValue(CreateReportEmbedURL);
             }
             if (Optional.IsDefined(QnaEmbedURL))
             {
-                writer.WritePropertyName("QnaEmbedURL"u8);
+                writer.WritePropertyName("qnaEmbedURL"u8);
                 writer.WriteStringValue(QnaEmbedURL);
             }
             if (Optional.IsDefined(WebUrl))
@@ -45,12 +45,12 @@ namespace Microsoft.PowerBI.Api.Models
             string webUrl = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("CreateReportEmbedURL"u8))
+                if (property.NameEquals("createReportEmbedURL"u8))
                 {
                     createReportEmbedURL = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("QnaEmbedURL"u8))
+                if (property.NameEquals("qnaEmbedURL"u8))
                 {
                     qnaEmbedURL = property.Value.GetString();
                     continue;
