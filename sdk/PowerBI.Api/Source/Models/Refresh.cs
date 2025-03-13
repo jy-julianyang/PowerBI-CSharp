@@ -21,8 +21,8 @@ namespace Microsoft.PowerBI.Api.Models
 
         /// <summary> Initializes a new instance of <see cref="Refresh"/>. </summary>
         /// <param name="refreshType"> The type of refresh request. </param>
-        /// <param name="startTime"> The start date and time of the refresh. </param>
-        /// <param name="endTime"> The end date and time of the refresh (may be empty if a refresh is in progress). </param>
+        /// <param name="startTime"> The start date and time of the refresh in UTC format. </param>
+        /// <param name="endTime"> The end date and time of the refresh (may be empty if a refresh is in progress) in UTC format. </param>
         /// <param name="serviceExceptionJson"> Failure error code in JSON format (empty if no error). </param>
         /// <param name="status">
         /// - `Unknown` if the completion state is unknown or a refresh is in progress.
@@ -45,9 +45,9 @@ namespace Microsoft.PowerBI.Api.Models
 
         /// <summary> The type of refresh request. </summary>
         public RefreshType? RefreshType { get; }
-        /// <summary> The start date and time of the refresh. </summary>
+        /// <summary> The start date and time of the refresh in UTC format. </summary>
         public DateTimeOffset? StartTime { get; }
-        /// <summary> The end date and time of the refresh (may be empty if a refresh is in progress). </summary>
+        /// <summary> The end date and time of the refresh (may be empty if a refresh is in progress) in UTC format. </summary>
         public DateTimeOffset? EndTime { get; }
         /// <summary> Failure error code in JSON format (empty if no error). </summary>
         public string ServiceExceptionJson { get; }

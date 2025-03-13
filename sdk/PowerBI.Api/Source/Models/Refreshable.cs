@@ -23,8 +23,8 @@ namespace Microsoft.PowerBI.Api.Models
         /// <param name="id"> The object ID of the refreshable. </param>
         /// <param name="name"> The display name of the refreshable. </param>
         /// <param name="kind"> The refreshable kind. </param>
-        /// <param name="startTime"> The start time of the window for which refresh data exists. </param>
-        /// <param name="endTime"> The end time of the window for which refresh data exists. </param>
+        /// <param name="startTime"> The start time of the window for which refresh data exists in UTC format. </param>
+        /// <param name="endTime"> The end time of the window for which refresh data exists in UTC format. </param>
         /// <param name="refreshCount"> The number of refreshes within the time window for which refresh data exists. </param>
         /// <param name="refreshFailures"> The number of refresh failures within the time window for which refresh data exists. </param>
         /// <param name="averageDuration"> The average duration in seconds of a refresh during the time window for which refresh data exists. </param>
@@ -60,9 +60,9 @@ namespace Microsoft.PowerBI.Api.Models
         public string Name { get; }
         /// <summary> The refreshable kind. </summary>
         public RefreshableKind? Kind { get; }
-        /// <summary> The start time of the window for which refresh data exists. </summary>
+        /// <summary> The start time of the window for which refresh data exists in UTC format. </summary>
         public DateTimeOffset? StartTime { get; }
-        /// <summary> The end time of the window for which refresh data exists. </summary>
+        /// <summary> The end time of the window for which refresh data exists in UTC format. </summary>
         public DateTimeOffset? EndTime { get; }
         /// <summary> The number of refreshes within the time window for which refresh data exists. </summary>
         public int? RefreshCount { get; }

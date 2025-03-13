@@ -151,8 +151,8 @@ namespace Microsoft.PowerBI.Api.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.Refresh"/>. </summary>
         /// <param name="refreshType"> The type of refresh request. </param>
-        /// <param name="startTime"> The start date and time of the refresh. </param>
-        /// <param name="endTime"> The end date and time of the refresh (may be empty if a refresh is in progress). </param>
+        /// <param name="startTime"> The start date and time of the refresh in UTC format. </param>
+        /// <param name="endTime"> The end date and time of the refresh (may be empty if a refresh is in progress) in UTC format. </param>
         /// <param name="serviceExceptionJson"> Failure error code in JSON format (empty if no error). </param>
         /// <param name="status">
         /// - `Unknown` if the completion state is unknown or a refresh is in progress.
@@ -789,8 +789,8 @@ namespace Microsoft.PowerBI.Api.Models
         /// <param name="id"> The object ID of the refreshable. </param>
         /// <param name="name"> The display name of the refreshable. </param>
         /// <param name="kind"> The refreshable kind. </param>
-        /// <param name="startTime"> The start time of the window for which refresh data exists. </param>
-        /// <param name="endTime"> The end time of the window for which refresh data exists. </param>
+        /// <param name="startTime"> The start time of the window for which refresh data exists in UTC format. </param>
+        /// <param name="endTime"> The end time of the window for which refresh data exists in UTC format. </param>
         /// <param name="refreshCount"> The number of refreshes within the time window for which refresh data exists. </param>
         /// <param name="refreshFailures"> The number of refresh failures within the time window for which refresh data exists. </param>
         /// <param name="averageDuration"> The average duration in seconds of a refresh during the time window for which refresh data exists. </param>
