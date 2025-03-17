@@ -141,9 +141,14 @@ extends:
             displayName: 'Publish test results'
             inputs:
               testResultsFormat: vstest
-              testResultsFiles: '**\*'
-              searchFolder: '$(Build.SourcesDirectory)\TestResults'
+              testResultsFiles: '*.trx'
+              searchFolder: '$(Build.SourcesDirectory)\TestResults\'
               failTaskOnFailedTests: true
+
+          - task: PublishCodeCoverageResults@2
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: '$(Build.SourcesDirectory)\TestResults\**\*.cobertura.xml'
 
           - task: CopyFiles@2
             displayName: 'Copy test results'
