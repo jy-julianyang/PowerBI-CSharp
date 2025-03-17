@@ -6569,7 +6569,6 @@ namespace Microsoft.PowerBI.Api
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="datasetId"/> is null. </exception>
         /// <remarks>
-        /// Each request takes 0.5 seconds to process, during which time other requests are queued.
         ///
         /// ## Permissions
         ///
@@ -6583,6 +6582,10 @@ namespace Microsoft.PowerBI.Api
         /// Tenant.Read.All or Tenant.ReadWrite.All
         ///
         /// Relevant only when authenticating via a standard delegated admin access token. Must not be present when authentication via a service principal is used.
+        ///
+        /// ## Limitations
+        ///
+        /// Maximum 300 requests per hour.
         /// &lt;br&gt;&lt;br&gt;
         /// </remarks>
         public async Task<Response<Datasources>> GetDatasourcesAsAdminAsync(string datasetId, CancellationToken cancellationToken = default)
@@ -6613,7 +6616,6 @@ namespace Microsoft.PowerBI.Api
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="datasetId"/> is null. </exception>
         /// <remarks>
-        /// Each request takes 0.5 seconds to process, during which time other requests are queued.
         ///
         /// ## Permissions
         ///
@@ -6627,6 +6629,10 @@ namespace Microsoft.PowerBI.Api
         /// Tenant.Read.All or Tenant.ReadWrite.All
         ///
         /// Relevant only when authenticating via a standard delegated admin access token. Must not be present when authentication via a service principal is used.
+        ///
+        /// ## Limitations
+        ///
+        /// Maximum 300 requests per hour.
         /// &lt;br&gt;&lt;br&gt;
         /// </remarks>
         public Response<Datasources> GetDatasourcesAsAdmin(string datasetId, CancellationToken cancellationToken = default)

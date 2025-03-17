@@ -23,7 +23,7 @@ namespace Microsoft.PowerBI.Api.Models
 
         /// <summary> Initializes a new instance of <see cref="Report"/>. </summary>
         /// <param name="id"> The report ID. </param>
-        /// <param name="name"> The name of the report. App reports has prefix [App]. </param>
+        /// <param name="name"> The name of the report. App reports start with the prefix [App]. </param>
         /// <param name="datasetId"> The dataset ID of the report. </param>
         /// <param name="appId"> The app ID, returned only if the report belongs to an app. </param>
         /// <param name="description"> The report description. </param>
