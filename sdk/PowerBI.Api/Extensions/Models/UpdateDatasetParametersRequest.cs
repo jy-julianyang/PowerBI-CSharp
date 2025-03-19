@@ -9,8 +9,7 @@
         /// <param name="updateDetails">The mashup parameter to update</param>
         public UpdateMashupParametersRequest(UpdateMashupParameterDetails updateDetails)
         {
-            UpdateDetails = new [] { updateDetails };
-            CustomInit();
+            UpdateDetails = new[] { updateDetails };
         }
     }
 }

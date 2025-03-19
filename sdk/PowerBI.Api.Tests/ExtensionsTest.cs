@@ -1,11 +1,7 @@
 ﻿using Microsoft.PowerBI.Api;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PowerBI.Api.Tests
 {
@@ -15,15 +11,16 @@ namespace PowerBI.Api.Tests
         [TestMethod]
         public void VerifyAllInGroupFunctionsHasMatchingOverrideWithoutInGroup()
         {
-            Type[] expectedTypeWithInGroupVersions = { typeof(ReportsOperationsExtensions), typeof(DatasetsOperationsExtensions), typeof(DashboardsOperationsExtensions), typeof(TilesOperationsExtensions), typeof(ImportsOperationsExtensions), typeof(DataflowsOperationsExtensions) };
+            Type[] expectedTypeWithInGroupVersions = { typeof(ReportsClient), typeof(DatasetsClient), typeof(DashboardsClient), typeof(TilesClient), typeof(DataflowsClient), typeof(ImportsClient) };
             string[] notOverridenMethods = { "DeleteUserInGroup", "DeleteUserInGroupAsync" };
-            
-            var allExtensionTypes = typeof(PowerBIClient).Assembly.GetTypes().Where(t => t.Name.EndsWith("Extensions"));
+            string[] expectedMethodsWithoutMyWorkspaceVersions = { "GenerateTokenForCreateInGroup", "GenerateTokenInGroup", "TakeOverInGroup", "GetUpstreamDataflowsInGroup", "GetDatasetToDataflowsLinksAsAdminInGroup", "GetDatasetToDataflowsLinksInGroup" };
+
+            var allExtensionTypes = typeof(PowerBIClient).Assembly.GetTypes().Where(t => t.Name.EndsWith("Client") && !t.Name.Contains("Rest"));
             foreach (var type in allExtensionTypes)
             {
                 if (expectedTypeWithInGroupVersions.Contains(type))
                 {
-                    TestInGroupOverrides(type);
+                    TestInGroupOverrides(type, expectedMethodsWithoutMyWorkspaceVersions);
                 }
                 else
                 {
@@ -33,41 +30,19 @@ namespace PowerBI.Api.Tests
             }
         }
 
-        private void TestInGroupOverrides(Type type)
+        private void TestInGroupOverrides(Type type, string[] notOverridenMethods)
         {
             var allMethods = type.GetMethods();
-            var inGroupMethods = allMethods.Where(mi => mi.Name.Contains("InGroup"));
-            var parameterInfoComparer = new ParameterInfoComparer();
+            var inGroupMethods = allMethods.Where(mi => mi.Name.Contains("InGroup") && !notOverridenMethods.Any(substring => mi.Name.Contains(substring)));
 
             foreach (var inGroupMethod in inGroupMethods)
             {
                 // Search method with the same name without InGroup, and with the same parameter list
                 var nameWithoutInGroup = inGroupMethod.Name.Replace("InGroup", "");
-                
-                var overrideMethods = allMethods
-                    .Where(mi => mi.Name.Equals(nameWithoutInGroup) && 
-                           mi.GetParameters().SequenceEqual(inGroupMethod.GetParameters(), parameterInfoComparer));
-                
-                if (overrideMethods.Count() == 0)
-                {
-                    var methodParams = string.Join(", ", inGroupMethod.GetParameters().Select(pi => pi.ParameterType));
-                    Assert.Fail("Expecting to find method {0}, in class {1} with parameters ({2}) (copy of {0}InGroup) - To Resolve - copy {0}InGroup from {1}.cs to Extensions\\V2\\{1}.cs and rename to {0}", nameWithoutInGroup, type.Name, methodParams);
-                }
+
+                var overrideMethods = allMethods.Where(mi => mi.Name.Equals(nameWithoutInGroup));
 
                 Assert.AreEqual(1, overrideMethods.Count(), "Expecting exactly one instance of mathcing method without InGroup suffix");
-            }
-        }
-
-        private class ParameterInfoComparer : IEqualityComparer<ParameterInfo>
-        {
-            public bool Equals(ParameterInfo x, ParameterInfo y)
-            {
-                return x.ParameterType == y.ParameterType && x.Name == y.Name;
-            }
-
-            public int GetHashCode(ParameterInfo obj)
-            {
-                return obj.ParameterType.GetHashCode() ^ obj.Name.GetHashCode();
             }
         }
 

@@ -5,16 +5,37 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
 namespace Microsoft.PowerBI.Api.Extensions
-{    //Reference - https://docs.microsoft.com/en-us/dotnet/standard/security/vulnerabilities-cbc-mode
+{
+    //Reference - https://docs.microsoft.com/en-us/dotnet/standard/security/vulnerabilities-cbc-mode
+    /// <summary>
+    /// Represents the available authenticated encryption cipher options.
+    /// </summary>
     public enum AeCipher : byte
     {
+        /// <summary>
+        /// AES 256-bit cipher in CBC mode with PKCS#7 padding.
+        /// </summary>
         Aes256CbcPkcs7
     }
 
+    /// <summary>
+    /// Represents the available message authentication code (MAC) algorithms.
+    /// </summary>
     public enum AeMac : byte
     {
+        /// <summary>
+        /// HMAC using SHA-256 hashing algorithm.
+        /// </summary>
         HMACSHA256,
+
+        /// <summary>
+        /// HMAC using SHA-384 hashing algorithm.
+        /// </summary>
         HMACSHA384,
+
+        /// <summary>
+        /// HMAC using SHA-512 hashing algorithm.
+        /// </summary>
         HMACSHA512
     }
 
@@ -45,6 +66,9 @@ namespace Microsoft.PowerBI.Api.Extensions
         }
     }
 
+    /// <summary>
+    /// providing methods for authenticated encryption.
+    /// </summary>
     public static partial class AuthenticatedEncryption
     {
         // choose an encryption scheme.
@@ -61,7 +85,9 @@ namespace Microsoft.PowerBI.Api.Extensions
         // This is similar in practice to PKCS#7 messaging, but this uses a
         // private-scoped byte rather than a public-scoped Object IDentifier (OID).
         private static byte[] algorithmChoices = { (byte)aeCipher, (byte)aeMac };
-
+        /// <summary>
+        /// Encrypts a message using the specified keys.
+        /// </summary>
         public static byte[] Encrypt(byte[] keyEnc, byte[] keyMac, byte[] message)
         {
             if (keyEnc == null)
@@ -137,6 +163,9 @@ namespace Microsoft.PowerBI.Api.Extensions
             return output;
         }
 
+        /// <summary>
+        /// Encrypts a message using the specified keys.
+        /// </summary>
         public static byte[] Decrypt(byte[] keyEnc, byte[] keyMac, byte[] cipherText)
         {
             if (keyEnc == null)

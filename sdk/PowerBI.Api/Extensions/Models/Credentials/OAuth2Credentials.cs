@@ -1,6 +1,5 @@
 ﻿namespace Microsoft.PowerBI.Api.Models.Credentials
 {
-    using Microsoft.Rest;
 
     /// <summary>
     /// OAuth2 based datasource credentials using OAuth2 access token
@@ -17,10 +16,8 @@
         /// <param name="accessToken">The access token</param>
         public OAuth2Credentials(string accessToken)
         {
-            if (string.IsNullOrEmpty(accessToken))
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, ACCESS_TOKEN);
-            }
+
+            Argument.AssertNotNullOrEmpty(accessToken, nameof(accessToken));
 
             this.CredentialData[ACCESS_TOKEN] = accessToken;
         }

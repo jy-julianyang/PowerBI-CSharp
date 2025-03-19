@@ -4,6 +4,9 @@ using System.Threading;
 
 namespace Microsoft.PowerBI.Api.Extensions
 {
+    /// <summary>
+    /// Helper class for asymmetric 1024-bit key encryption.
+    /// </summary>
     public static class Asymmetric1024KeyEncryptionHelper
     {
         private const int SegmentLength = 85;

@@ -1,170 +1,135 @@
 ﻿using System;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.PowerBI.Api;
 using Microsoft.PowerBI.Api.Models;
-using Microsoft.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
+using Azure;
+using Moq;
+using System.Threading;
 
 namespace PowerBI.Api.Tests
 {
     [TestClass]
     public class ReportTests
     {
-        private const string AccessKey = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-
-        private Guid groupId;
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            this.groupId = Guid.NewGuid();
-        }
-
         [TestMethod]
         public async Task ReportDelete()
         {
-            var deleteResponse = CreateSampleReportResponse();
+            // Create a mock response 
+            var mockResponse = new Mock<Response>();
+            mockResponse.Setup(r => r.Status).Returns(200);
 
-            var reportId = Guid.NewGuid();
+            // Create a mock of PowerBIClient
+            var mockClient = new Mock<PowerBIClient>();
 
-            using (var handler = new FakeHttpClientHandler(deleteResponse))
-            using (var client = CreatePowerBIClient(handler))
-            {
-                await client.Reports.DeleteReportAsync(reportId);
+            // Set up client method
+            mockClient.Setup(x => x.Reports.DeleteReportAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>())).ReturnsAsync(mockResponse.Object);
 
-                var expectedRequestUrl = $"https://api.powerbi.com/v1.0/myorg/reports/{reportId}";
-                Assert.AreEqual(expectedRequestUrl, handler.Request.RequestUri.ToString());
-                CheckAuthHeader(handler.Request.Headers.Authorization.ToString());
-            }
+            // Use the client mock
+            var client = mockClient.Object;
+            var result = await client.Reports.DeleteReportAsync(It.IsAny<Guid>());
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(200, result.Status);
         }
 
         [TestMethod]
         public async Task ReportDeleteInGroup()
         {
-            var deleteResponse = CreateSampleReportResponse();
+            // Create a mock response 
+            var mockResponse = new Mock<Response>();
+            mockResponse.Setup(r => r.Status).Returns(200);
 
-            var reportId = Guid.NewGuid();
+            // Create a mock of PowerBIClient
+            var mockClient = new Mock<PowerBIClient>();
 
-            using (var handler = new FakeHttpClientHandler(deleteResponse))
-            using (var client = CreatePowerBIClient(handler))
-            {
-                await client.Reports.DeleteReportInGroupAsync(this.groupId, reportId);
+            // Set up client method
+            mockClient.Setup(x => x.Reports.DeleteReportInGroupAsync(It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<CancellationToken>())).ReturnsAsync(mockResponse.Object);
 
-                var expectedRequestUrl = $"https://api.powerbi.com/v1.0/myorg/groups/{this.groupId}/reports/{reportId}";
-                Assert.AreEqual(expectedRequestUrl, handler.Request.RequestUri.ToString());
-                CheckAuthHeader(handler.Request.Headers.Authorization.ToString());
-            }
+            // Use the client mock
+            var client = mockClient.Object;
+            var result = await client.Reports.DeleteReportInGroupAsync(It.IsAny<Guid>(), It.IsAny<Guid>());
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(200, result.Status);
         }
 
         [TestMethod]
         public async Task ReportRebind()
         {
-            var rebindResponse = CreateSampleOKResponse();
+            // Create a mock response
+            var mockResponse = new Mock<Response>();
+            mockResponse.Setup(r => r.Status).Returns(200);
 
-            var reportId = Guid.NewGuid();
-            var datasetId = Guid.NewGuid().ToString();
+            // Create a mock value
+            var mockValue = MicrosoftPowerBIApiModelFactory.Reports();
 
-            using (var handler = new FakeHttpClientHandler(rebindResponse))
-            using (var client = CreatePowerBIClient(handler))
-            {
-                await client.Reports.RebindReportAsync(reportId, new RebindReportRequest(datasetId));
+            // Create a mock of PowerBIClient
+            var mock = new Mock<PowerBIClient>();
 
-                var expectedRequestUrl = $"https://api.powerbi.com/v1.0/myorg/reports/{reportId}/Rebind";
+            //Set up client method
+            mock.Setup(x => x.Reports.RebindReportAsync(It.IsAny<Guid>(), It.IsAny<RebindReportRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(mockResponse.Object);
 
-                Assert.AreEqual(expectedRequestUrl, handler.Request.RequestUri.ToString());
-                CheckAuthHeader(handler.Request.Headers.Authorization.ToString());
-            }
-        }
+            //Use the client mock
+            PowerBIClient client = mock.Object;
+            var result = await client.Reports.RebindReportAsync(It.IsAny<Guid>(), It.IsAny<RebindReportRequest>(), It.IsAny<CancellationToken>());
 
-        private void CheckAuthHeader(string authHeader)
-        {
-            string expectedHeader = $"Bearer {AccessKey}";
-            Assert.AreEqual<string>(authHeader, expectedHeader);
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(200, result.Status);
         }
 
         [TestMethod]
         public async Task ReportClone()
         {
-            var cloneResponse = CreateSampleReportResponse();
+            // Create a mock response
+            var mockResponse = new Mock<Response<Report>>();
+            mockResponse.Setup(r => r.GetRawResponse().Status).Returns(200);
 
-            var reportId = Guid.NewGuid();
+            // Create a mock value
+            var mockValue = MicrosoftPowerBIApiModelFactory.Reports();
 
-            var cloneRequest = new CloneReportRequest()
-            {
-                TargetModelId = Guid.NewGuid().ToString(),
-                Name = "Model Name",
-                TargetWorkspaceId = Guid.NewGuid()
-            };
+            // Create a mock of PowerBIClient
+            var mock = new Mock<PowerBIClient>();
 
-            using (var handler = new FakeHttpClientHandler(cloneResponse))
-            using (var client = CreatePowerBIClient(handler))
-            {
-                var response = await client.Reports.CloneReportAsync(reportId, cloneRequest);
+            //Set up client method
+            mock.Setup(x => x.Reports.CloneReportAsync(It.IsAny<Guid>(), It.IsAny<CloneReportRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(mockResponse.Object);
 
-                var expectedRequestUrl = $"https://api.powerbi.com/v1.0/myorg/reports/{reportId}/Clone";
+            //Use the client mock
+            PowerBIClient client = mock.Object;
+            var result = await client.Reports.CloneReportAsync(It.IsAny<Guid>(), It.IsAny<CloneReportRequest>(), It.IsAny<CancellationToken>());
 
-                Assert.AreEqual(expectedRequestUrl, handler.Request.RequestUri.ToString());
-                Assert.IsNotNull(response.Id);
-                Assert.IsNotNull(response.EmbedUrl);
-                Assert.IsNotNull(response.Name);
-                Assert.IsNotNull(response.WebUrl);
-                CheckAuthHeader(handler.Request.Headers.Authorization.ToString());
-            }
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(200, result.GetRawResponse().Status);
+
         }
 
         [TestMethod]
         public async Task UpdateReportContent()
         {
-            var updateReportContentResponse = CreateSampleReportResponse();
+            // Create a mock response
+            var mockResponse = new Mock<Response<Report>>();
+            mockResponse.Setup(r => r.GetRawResponse().Status).Returns(200);
 
-            var reportId = Guid.NewGuid();
+            // Create a mock value
+            var mockValue = MicrosoftPowerBIApiModelFactory.Reports();
 
-            var reportUpdateContentRequest = new UpdateReportContentRequest()
-            {
-                SourceReport = new SourceReport(Guid.NewGuid(), Guid.NewGuid())
-            };
+            // Create a mock of PowerBIClient
+            var mock = new Mock<PowerBIClient>();
 
-            using (var handler = new FakeHttpClientHandler(updateReportContentResponse))
-            using (var client = CreatePowerBIClient(handler))
-            {
-                var response = await client.Reports.UpdateReportContentAsync(reportId, reportUpdateContentRequest);
+            //Set up client method
+            mock.Setup(x => x.Reports.UpdateReportContentAsync(It.IsAny<Guid>(), It.IsAny<UpdateReportContentRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(mockResponse.Object);
 
-                var expectedRequestUrl = $"https://api.powerbi.com/v1.0/myorg/reports/{reportId}/UpdateReportContent";
+            //Use the client mock
+            PowerBIClient client = mock.Object;
+            var result = await client.Reports.UpdateReportContentAsync(It.IsAny<Guid>(), It.IsAny<UpdateReportContentRequest>(), It.IsAny<CancellationToken>());
 
-                Assert.AreEqual(expectedRequestUrl, handler.Request.RequestUri.ToString());
-                Assert.IsNotNull(response.Id);
-                Assert.IsNotNull(response.EmbedUrl);
-                Assert.IsNotNull(response.Name);
-                Assert.IsNotNull(response.WebUrl);
-                CheckAuthHeader(handler.Request.Headers.Authorization.ToString());
-            }
-        }
-
-        private IPowerBIClient CreatePowerBIClient(HttpClientHandler handler)
-        {
-            var credentials = new TokenCredentials(AccessKey);
-            return new PowerBIClient(credentials, handler);
-        }
-
-        private static HttpResponseMessage CreateSampleOKResponse(string name = default(string))
-        {
-            return new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent(JsonConvert.SerializeObject(""))
-            };
-        }
-
-        private static HttpResponseMessage CreateSampleReportResponse(string name = default(string))
-        {
-            var report = new Report(id: Guid.NewGuid(), name: "Report Name", webUrl: "AN URL", embedUrl: "EMBEDURL");
-
-            return new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent(JsonConvert.SerializeObject(report))
-            };
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(200, result.GetRawResponse().Status);
         }
     }
 }

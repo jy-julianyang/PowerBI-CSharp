@@ -14,8 +14,8 @@
         /// <summary>
         /// Initializes a new instance of the CredentialDetails class.
         /// </summary>
-        public CredentialDetails(CredentialsBase credentialsBase, PrivacyLevel privacyLevel, EncryptedConnection encryptedConnection, ICredentialsEncryptor credentialsEncryptor = null, bool? useEndUserOAuth2Credentials = default(bool?))
-            : this(privacyLevel, encryptedConnection, credentialsEncryptor, useEndUserOAuth2Credentials)
+        public CredentialDetails(CredentialsBase credentialsBase, CredentialType credentialType, PrivacyLevel privacyLevel, EncryptedConnection encryptedConnection, ICredentialsEncryptor credentialsEncryptor = null, bool? useEndUserOAuth2Credentials = default(bool?))
+            : this(privacyLevel, credentialType,encryptedConnection, credentialsEncryptor, useEndUserOAuth2Credentials)
         {
             var credentials = new CredentialsRequest
             {
@@ -36,14 +36,14 @@
         /// <summary>
         /// Initializes a new instance of the CredentialDetails class.
         /// </summary>
-        protected CredentialDetails(PrivacyLevel privacyLevel, EncryptedConnection encryptedConnection, ICredentialsEncryptor credentialsEncryptor, bool? useEndUserOAuth2Credentials = default(bool?))
+        protected CredentialDetails(PrivacyLevel privacyLevel, CredentialType credentialType, EncryptedConnection encryptedConnection, ICredentialsEncryptor credentialsEncryptor, bool? useEndUserOAuth2Credentials = default(bool?))
         {
             EncryptedConnection = encryptedConnection;
-            EncryptionAlgorithm = credentialsEncryptor != null ? EncryptionAlgorithm.RSAOAEP : EncryptionAlgorithm.None;
+            EncryptionAlgorithm = credentialsEncryptor != null ? EncryptionAlgorithm.RSAOaep : EncryptionAlgorithm.None;
             PrivacyLevel = privacyLevel;
+            CredentialType = credentialType;
             UseCallerAADIdentity = false;
             UseEndUserOAuth2Credentials = useEndUserOAuth2Credentials;
-            CustomInit();
         }
     }
 
@@ -56,9 +56,8 @@
         /// Initializes a new instance of the UpdateDatasourceRequest class for cloud datasource.
         /// </summary>
         public CredentialDetailsUsingCallerOauthAADIdentity(PrivacyLevel privacyLevel, EncryptedConnection encryptedConnection, bool? useEndUserOAuth2Credentials = default(bool?))
-            : base(privacyLevel, encryptedConnection, null, useEndUserOAuth2Credentials)
+            : base(privacyLevel, CredentialType.OAuth2, encryptedConnection, null, useEndUserOAuth2Credentials)
         {
-            CredentialType = CredentialType.OAuth2;
             UseCallerAADIdentity = true;
         }
     }
@@ -68,6 +67,9 @@
     /// </summary>
     public class CredentialsRequest
     {
+        /// <summary>
+        /// Credential Data
+        /// </summary>
         [JsonProperty(PropertyName = "credentialData")]
         public IEnumerable<NameValuePair> CredentialData { get; set; }
     }
@@ -77,17 +79,31 @@
     /// </summary>
     public class NameValuePair
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NameValuePair"/> class.
+        /// </summary>
         public NameValuePair() { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NameValuePair"/> class with the specified name and value.
+        /// </summary>
+        /// <param name="name">The name of the pair.</param>
+        /// <param name="value">The value of the pair.</param>
         public NameValuePair(string name = default(string), string value = default(string))
         {
             this.Name = name;
             this.Value = value;
         }
 
+        /// <summary>
+        /// Gets or sets the name of the pair.
+        /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value of the pair.
+        /// </summary>
         [JsonProperty(PropertyName = "value")]
         public string Value { get; set; }
     }

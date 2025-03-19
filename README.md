@@ -1,11 +1,12 @@
 # Power BI REST APIs for .NET
-
+## Migration Guide
+If you are migrating from version `v4.22` to `v5`, please refer to the [Migration Guide](./Migration.md) for detailed instructions and breaking changes.
 ## Overview
 The Power BI REST APIs provide service endpoints for embedding, user resources management, administration and governance.
 
 For more information about Power BI REST APIs, see [Power BI REST APIs overview](https://docs.microsoft.com/rest/api/power-bi/).
 
-## Power BI API library 
+## Power BI API library
 The Microsoft.PowerBI.Api library for .NET enables you to work with Power BI REST APIs in your .NET or NET Core application.
 
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.PowerBI.Api/) directly from the Visual Studio [Package Manager console](https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-powershell).
@@ -14,7 +15,17 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.PowerBI.Api
 ```powershell
 Install-Package Microsoft.PowerBI.Api
 ```
+## Creating the Power BI Client
+The `PowerBIClient` can be created using either **credentials** or a **Microsoft Entra Access Token**.
 
+###  Using Credentials
+Authenticate by providing service principal `credentials(client ID, client secret, and tenant ID)` or username password `credentials(client ID, tenant ID, username and password )`.  
+
+For more details, see the [Authentication Updates](./Migration.md#authentication-updates) section in the migration guide.
+
+
+###  Using Microsoft Entra Access Token
+Alternatively, authenticate using a Microsoft Entra Access Token for secure, delegated access.
 ## Examples
 
 Below are basic examples demonstrating some of the most common capabilities of the SDK.
@@ -23,13 +34,13 @@ Full examples including authentication are avaliable in [PowerBI-Developer-Sampl
 ### Get the list of datasets and reports in a Power BI workspace
 ```C#
 ...
-using (PowerBIClient client = new PowerBIClient(credentials))
+using (PowerBIClient client = new PowerBIClient(credentials or Microsoft Entra Access Token ))
 {
 
     Console.WriteLine("\r*** DATASETS ***\r");
 
     // List of datasets in a workspace
-    Datasets datasets = client.Datasets.GetDatasets(groupId);
+    Datasets datasets = client.Datasets.GetDatasetsInGroup(groupId);
 
     foreach(Dataset ds in datasets.Value)
     {
@@ -39,7 +50,7 @@ using (PowerBIClient client = new PowerBIClient(credentials))
     Console.WriteLine("\r*** REPORTS ***\r");
 
     // List of reports in a workspace
-    Reports reports = client.Reports.GetReports(groupId);
+    Reports reports = client.Reports.GetReportsInGroup(groupId);
 
     foreach (Report rpt in reports.Value)
     {
@@ -56,10 +67,14 @@ For more information about Power BI Embedded visit the [Power BI Embedded Analyt
 
 ```C#
 ...
-using (PowerBIClient client = new PowerBIClient(credentials))
+using (PowerBIClient client = new PowerBIClient(credentials or Microsoft Entra Access Token))
 {
     // Create a request for getting Embed token
-    var tokenRequest = new GenerateTokenRequestV2(datasets: datasets, reports: reports, targetWorkspaces: workspaces, identities: identities);
+     var tokenRequest = new GenerateTokenRequestV2();
+     tokenRequest.Datasets.Add(datasets);
+     tokenRequest.Reports.Add(reports);
+     tokenRequest.TargetWorkspaces.Add(workspaces);
+     tokenRequest.Identities.Add(identities);
 
     // Get Embed token
     var embedToken = client.EmbedToken.GenerateToken(tokenRequest);
@@ -70,7 +85,7 @@ using (PowerBIClient client = new PowerBIClient(credentials))
 Returns a list of reports for the organization. The caller must have administrator rights.
 ```C#
 ...
-using (PowerBIClient client = new PowerBIClient(credentials))
+using (PowerBIClient client = new PowerBIClient(credentials or Microsoft Entra Access Token))
 {
     Console.WriteLine("\r*** REPORTS ***\r");
 

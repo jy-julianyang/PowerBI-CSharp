@@ -5,11 +5,17 @@ using System.Text;
 
 namespace Microsoft.PowerBI.Api.Extensions
 {
+    /// <summary>
+    /// Represents an encryptor that uses asymmetric key encryption.
+    /// </summary>
     public class AsymmetricKeyEncryptor : ICredentialsEncryptor
     {
         private const int DefaultRSAKeySize = 1024;
         private readonly GatewayPublicKey publicKey;
 
+        /// <summary>
+        /// Represents an encryptor that uses asymmetric key encryption.
+        /// </summary>
         public AsymmetricKeyEncryptor(GatewayPublicKey publicKey)
         {
             if (publicKey == null)
