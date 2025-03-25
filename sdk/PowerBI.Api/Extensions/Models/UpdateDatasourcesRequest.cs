@@ -1,4 +1,4 @@
-namespace Microsoft.PowerBI.Api.Models
+﻿namespace Microsoft.PowerBI.Api.Models
 {
     public partial class UpdateDatasourcesRequest
     {
@@ -9,7 +9,6 @@ namespace Microsoft.PowerBI.Api.Models
         public UpdateDatasourcesRequest(UpdateDatasourceConnectionRequest updateDetails)
         {
             UpdateDetails = new[] { updateDetails };
-            CustomInit();
         }
     }
 }

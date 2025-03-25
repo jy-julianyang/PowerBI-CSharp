@@ -3,8 +3,6 @@ using Microsoft.PowerBI.Api;
 using Microsoft.PowerBI.Api.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 
 namespace PowerBI.Api.Tests
@@ -57,7 +55,8 @@ namespace PowerBI.Api.Tests
 
         private void EncodeCredentialsTestImpl(string credentialData, string exponent, string modulus)
         {
-            var asymmetricKeyEncryptor = new AsymmetricKeyEncryptor(new GatewayPublicKey(exponent, modulus));
+            var gatewayPublicKey = MicrosoftPowerBIApiModelFactory.GatewayPublicKey(exponent, modulus);
+            var asymmetricKeyEncryptor = new AsymmetricKeyEncryptor(gatewayPublicKey);
             var encodedCredentials = asymmetricKeyEncryptor.EncodeCredentials(credentialData);
 
             Assert.IsFalse(string.IsNullOrEmpty(encodedCredentials), "Encrypted credentials should not be null or empty");
@@ -89,7 +88,8 @@ namespace PowerBI.Api.Tests
         {
             try
             {
-                var asymmetricKeyEncryptor = new AsymmetricKeyEncryptor(new GatewayPublicKey(exponent, modulus));
+                var gatewayPublicKey = MicrosoftPowerBIApiModelFactory.GatewayPublicKey(exponent, modulus);
+                var asymmetricKeyEncryptor = new AsymmetricKeyEncryptor(gatewayPublicKey);
                 asymmetricKeyEncryptor.EncodeCredentials(credentialData);
             }
             catch (Exception ex)
