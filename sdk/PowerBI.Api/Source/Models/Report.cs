@@ -34,7 +34,7 @@ namespace Microsoft.PowerBI.Api.Models
         /// The report definition format type.
         /// For **PowerBIReport**:
         /// - [PBIR](https://learn.microsoft.com/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#pbir-format)
-        /// - [PBIR-Legacy](https://learn.microsoft.com/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#reportjson)
+        /// - [PBIRLegacy](https://learn.microsoft.com/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#reportjson)
         ///
         /// For **PaginatedReport**:
         /// - [`RDL`](https://learn.microsoft.com/power-bi/paginated-reports/report-definition-language)

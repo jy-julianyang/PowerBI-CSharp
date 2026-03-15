@@ -9911,14 +9911,14 @@
                     "Dataflows"
                 ],
                 "summary": "Save Dataflow Gen1 As Dataflow Gen2 (CI/CD) (Preview)",
-                "description": "Converts a Gen1 dataflow to a Fabric native artifact (Gen2 CI/CD).\n\n**Key Features:**\n- Creates a new Gen2 (CI/CD) artifact while preserving the original Gen1 dataflow\n- Optionally migrates refresh schedules\n- Updates connection formats to Fabric-compatible formats\n- Preserves sensitivity labels and security settings\n- Provides detailed error reporting for non-fatal issues\n\n**Prerequisites:**\n- Source dataflow must be Generation 1\n- User must have appropriate permissions on the workspace\n**Migration Process:**\n1. Validates source dataflow and permissions\n2. Converts dataflow definition to Fabric format\n3. Updates connection strings for Fabric compatibility\n4. Creates new Gen2 artifact in the specified workspace\n5. Optionally migrates refresh schedule\n6. Sets dataflow origin tracking\n\n**Error Handling:**\nThe API returns success even if some non-critical operations fail (e.g., schedule migration).\nSuch failures are reported in the `errors` array of the response. (Preview)\n",
+                "description": "Converts a Gen1 dataflow to a Fabric native artifact (Gen2 CI/CD).\n\n**Key Features:**\n- Creates a new Gen2 (CI/CD) artifact while preserving the original Gen1 dataflow\n- Optionally migrates refresh schedules\n- Updates connection formats to Fabric-compatible formats\n- Preserves sensitivity labels and security settings\n- Provides detailed error reporting for non-fatal issues\n- Supports specifying a target workspace for the new artifact\n\n**Prerequisites:**\n- Source dataflow must be Generation 1\n- User must have appropriate permissions on the workspace\n\n**Migration Process:**\n1. Validates source dataflow and permissions\n2. Converts dataflow definition to Fabric format\n3. Updates connection strings for Fabric compatibility\n4. Creates new Gen2 artifact in the specified workspace\n5. Optionally migrates refresh schedule\n\n**Error Handling:**\nThe API returns success even if some non-critical operations fail (e.g., schedule migration).\nSuch failures are reported in the `errors` array of the response.\n\n## Preview\n\nThis is a preview API call.\n",
                 "operationId": "Dataflows_SaveDataflowGenOneAsDataflowGenTwo",
                 "parameters": [
                     {
                         "name": "groupId",
                         "in": "path",
                         "required": true,
-                        "description": "The workspace (group) ID of the gen1 dataflow, where the new artifact will be created",
+                        "description": "The workspace (group) ID of the gen1 dataflow",
                         "type": "string",
                         "format": "uuid"
                     },
@@ -22610,7 +22610,7 @@
         },
         "SaveAsNativeDataflowErrorCode": {
             "type": "string",
-            "description": "Non-fatal error codes that can occur during migration",
+            "description": "Non-fatal warning codes that may occur during migration. These indicate partial failures that don't prevent the overall operation from succeeding.",
             "enum": [
                 "FailedToCopySchedule",
                 "SetDataflowOriginFailed",
@@ -23181,7 +23181,7 @@
                 },
                 "ContentProviderType": {
                     "type": "string",
-                    "description": "A deprecated property that should be ignored."
+                    "description": "The content provider type for the semantic model.\n\nThe following ContentProviderTypes are stored in the tenant home region:\n\n| ContentProviderType |\n|-|\n| Excel |\n| CSV |\n| UsageMetricsUserReport |\n| UsageMetricsUserDashboard |\n| RealTimeInPushMode |\n| RealTimeInPubNubMode |\n| RealTimeInStreamingMode |\n\nThe following ContentProviderTypes are stored in the Capacity region:\n\n| ContentProviderType |\n|-|\n| PowerBIDesktop |\n| PowerBIModelingService |\n| PbixInImportMode |\n| PbixInDirectQueryMode |\n| PbixInCompositeMode |\n| InImportMode |\n| InDirectQueryMode |\n| InCompositeMode |"
                 },
                 "description": {
                     "type": "string",
@@ -23203,11 +23203,11 @@
                     "type": "boolean",
                     "description": "Whether the dataset allows adding new rows"
                 },
-                "IsRefreshable": {
+                "isRefreshable": {
                     "type": "boolean",
                     "description": "This field returns `true` when the dataset is either recently refreshed or is configured for automatic refresh, with the connection mode specifically set to 'Import'. The value will return `false` for other connection modes, such as 'DirectQuery' and 'LiveConnection', regardless of whether the dataset is manually refreshed or is set up for automatic refresh."
                 },
-                "IsInPlaceSharingEnabled": {
+                "isInPlaceSharingEnabled": {
                     "type": "boolean",
                     "description": "Whether the dataset can be shared with external users to be consumed in their own tenant"
                 }
@@ -23216,15 +23216,15 @@
         "DatasetSecurityProperties": {
             "description": "A list of security related properties of a Power BI dataset.",
             "properties": {
-                "IsEffectiveIdentityRequired": {
+                "isEffectiveIdentityRequired": {
                     "type": "boolean",
                     "description": "Whether the dataset requires an effective identity, which you must send in a [GenerateToken](/rest/api/power-bi/embed-token/generate-token) API call."
                 },
-                "IsEffectiveIdentityRolesRequired": {
+                "isEffectiveIdentityRolesRequired": {
                     "type": "boolean",
                     "description": "Whether row-level security is defined inside the Power BI .pbix file. If so, you must specify a role."
                 },
-                "IsOnPremGatewayRequired": {
+                "isOnPremGatewayRequired": {
                     "type": "boolean",
                     "description": "Whether the dataset requires an on-premises data gateway"
                 },
@@ -24665,7 +24665,7 @@
                 },
                 "format": {
                     "type": "string",
-                    "description": "The report definition format type.\nFor **PowerBIReport**:\n- [PBIR](https://learn.microsoft.com/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#pbir-format)\n- [PBIR-Legacy](https://learn.microsoft.com/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#reportjson) \n\nFor **PaginatedReport**: \n- [`RDL`](https://learn.microsoft.com/power-bi/paginated-reports/report-definition-language)"
+                    "description": "The report definition format type.\nFor **PowerBIReport**:\n- [PBIR](https://learn.microsoft.com/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#pbir-format)\n- [PBIRLegacy](https://learn.microsoft.com/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#reportjson) \n\nFor **PaginatedReport**: \n- [`RDL`](https://learn.microsoft.com/power-bi/paginated-reports/report-definition-language)"
                 }
             }
         },

@@ -18,17 +18,17 @@ namespace Microsoft.PowerBI.Api.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(IsEffectiveIdentityRequired))
             {
-                writer.WritePropertyName("IsEffectiveIdentityRequired"u8);
+                writer.WritePropertyName("isEffectiveIdentityRequired"u8);
                 writer.WriteBooleanValue(IsEffectiveIdentityRequired.Value);
             }
             if (Optional.IsDefined(IsEffectiveIdentityRolesRequired))
             {
-                writer.WritePropertyName("IsEffectiveIdentityRolesRequired"u8);
+                writer.WritePropertyName("isEffectiveIdentityRolesRequired"u8);
                 writer.WriteBooleanValue(IsEffectiveIdentityRolesRequired.Value);
             }
             if (Optional.IsDefined(IsOnPremGatewayRequired))
             {
-                writer.WritePropertyName("IsOnPremGatewayRequired"u8);
+                writer.WritePropertyName("isOnPremGatewayRequired"u8);
                 writer.WriteBooleanValue(IsOnPremGatewayRequired.Value);
             }
             if (Optional.IsDefined(Encryption))
@@ -51,7 +51,7 @@ namespace Microsoft.PowerBI.Api.Models
             Encryption encryption = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("IsEffectiveIdentityRequired"u8))
+                if (property.NameEquals("isEffectiveIdentityRequired"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -60,7 +60,7 @@ namespace Microsoft.PowerBI.Api.Models
                     isEffectiveIdentityRequired = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("IsEffectiveIdentityRolesRequired"u8))
+                if (property.NameEquals("isEffectiveIdentityRolesRequired"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -69,7 +69,7 @@ namespace Microsoft.PowerBI.Api.Models
                     isEffectiveIdentityRolesRequired = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("IsOnPremGatewayRequired"u8))
+                if (property.NameEquals("isOnPremGatewayRequired"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

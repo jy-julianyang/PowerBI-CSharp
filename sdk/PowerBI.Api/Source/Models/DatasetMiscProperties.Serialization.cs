@@ -23,12 +23,12 @@ namespace Microsoft.PowerBI.Api.Models
             }
             if (Optional.IsDefined(IsRefreshable))
             {
-                writer.WritePropertyName("IsRefreshable"u8);
+                writer.WritePropertyName("isRefreshable"u8);
                 writer.WriteBooleanValue(IsRefreshable.Value);
             }
             if (Optional.IsDefined(IsInPlaceSharingEnabled))
             {
-                writer.WritePropertyName("IsInPlaceSharingEnabled"u8);
+                writer.WritePropertyName("isInPlaceSharingEnabled"u8);
                 writer.WriteBooleanValue(IsInPlaceSharingEnabled.Value);
             }
             writer.WriteEndObject();
@@ -54,7 +54,7 @@ namespace Microsoft.PowerBI.Api.Models
                     addRowsAPIEnabled = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("IsRefreshable"u8))
+                if (property.NameEquals("isRefreshable"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -63,7 +63,7 @@ namespace Microsoft.PowerBI.Api.Models
                     isRefreshable = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("IsInPlaceSharingEnabled"u8))
+                if (property.NameEquals("isInPlaceSharingEnabled"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
