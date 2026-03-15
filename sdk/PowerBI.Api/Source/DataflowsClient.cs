@@ -60,7 +60,7 @@ namespace Microsoft.PowerBI.Api
         }
 
         /// <summary> Save Dataflow Gen1 As Dataflow Gen2 (CI/CD) (Preview). </summary>
-        /// <param name="groupId"> The workspace (group) ID of the gen1 dataflow, where the new artifact will be created. </param>
+        /// <param name="groupId"> The workspace (group) ID of the gen1 dataflow. </param>
         /// <param name="gen1DataflowId"> The object ID of the Gen1 dataflow to save as a native artifact. </param>
         /// <param name="saveAsNativeDataflowRequest"> Patch dataflow properties, capabilities and settings. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -73,21 +73,26 @@ namespace Microsoft.PowerBI.Api
         /// - Updates connection formats to Fabric-compatible formats
         /// - Preserves sensitivity labels and security settings
         /// - Provides detailed error reporting for non-fatal issues
+        /// - Supports specifying a target workspace for the new artifact
         ///
         /// **Prerequisites:**
         /// - Source dataflow must be Generation 1
         /// - User must have appropriate permissions on the workspace
+        ///
         /// **Migration Process:**
         /// 1. Validates source dataflow and permissions
         /// 2. Converts dataflow definition to Fabric format
         /// 3. Updates connection strings for Fabric compatibility
         /// 4. Creates new Gen2 artifact in the specified workspace
         /// 5. Optionally migrates refresh schedule
-        /// 6. Sets dataflow origin tracking
         ///
         /// **Error Handling:**
         /// The API returns success even if some non-critical operations fail (e.g., schedule migration).
-        /// Such failures are reported in the `errors` array of the response. (Preview)
+        /// Such failures are reported in the `errors` array of the response.
+        ///
+        /// ## Preview
+        ///
+        /// This is a preview API call.
         ///
         /// </remarks>
         public virtual async Task<Response<SaveAsNativeDataflowResponse>> SaveDataflowGenOneAsDataflowGenTwoAsync(Guid groupId, Guid gen1DataflowId, SaveAsNativeDataflowRequest saveAsNativeDataflowRequest, CancellationToken cancellationToken = default)
@@ -106,7 +111,7 @@ namespace Microsoft.PowerBI.Api
         }
 
         /// <summary> Save Dataflow Gen1 As Dataflow Gen2 (CI/CD) (Preview). </summary>
-        /// <param name="groupId"> The workspace (group) ID of the gen1 dataflow, where the new artifact will be created. </param>
+        /// <param name="groupId"> The workspace (group) ID of the gen1 dataflow. </param>
         /// <param name="gen1DataflowId"> The object ID of the Gen1 dataflow to save as a native artifact. </param>
         /// <param name="saveAsNativeDataflowRequest"> Patch dataflow properties, capabilities and settings. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -119,21 +124,26 @@ namespace Microsoft.PowerBI.Api
         /// - Updates connection formats to Fabric-compatible formats
         /// - Preserves sensitivity labels and security settings
         /// - Provides detailed error reporting for non-fatal issues
+        /// - Supports specifying a target workspace for the new artifact
         ///
         /// **Prerequisites:**
         /// - Source dataflow must be Generation 1
         /// - User must have appropriate permissions on the workspace
+        ///
         /// **Migration Process:**
         /// 1. Validates source dataflow and permissions
         /// 2. Converts dataflow definition to Fabric format
         /// 3. Updates connection strings for Fabric compatibility
         /// 4. Creates new Gen2 artifact in the specified workspace
         /// 5. Optionally migrates refresh schedule
-        /// 6. Sets dataflow origin tracking
         ///
         /// **Error Handling:**
         /// The API returns success even if some non-critical operations fail (e.g., schedule migration).
-        /// Such failures are reported in the `errors` array of the response. (Preview)
+        /// Such failures are reported in the `errors` array of the response.
+        ///
+        /// ## Preview
+        ///
+        /// This is a preview API call.
         ///
         /// </remarks>
         public virtual Response<SaveAsNativeDataflowResponse> SaveDataflowGenOneAsDataflowGenTwo(Guid groupId, Guid gen1DataflowId, SaveAsNativeDataflowRequest saveAsNativeDataflowRequest, CancellationToken cancellationToken = default)

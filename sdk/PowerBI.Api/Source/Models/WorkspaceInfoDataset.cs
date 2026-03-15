@@ -36,7 +36,34 @@ namespace Microsoft.PowerBI.Api.Models
         /// <param name="name"> The dataset name. </param>
         /// <param name="configuredBy"> The dataset owner. </param>
         /// <param name="createdDate"> The dataset creation date and time. </param>
-        /// <param name="contentProviderType"> A deprecated property that should be ignored. </param>
+        /// <param name="contentProviderType">
+        /// The content provider type for the semantic model.
+        ///
+        /// The following ContentProviderTypes are stored in the tenant home region:
+        ///
+        /// | ContentProviderType |
+        /// |-|
+        /// | Excel |
+        /// | CSV |
+        /// | UsageMetricsUserReport |
+        /// | UsageMetricsUserDashboard |
+        /// | RealTimeInPushMode |
+        /// | RealTimeInPubNubMode |
+        /// | RealTimeInStreamingMode |
+        ///
+        /// The following ContentProviderTypes are stored in the Capacity region:
+        ///
+        /// | ContentProviderType |
+        /// |-|
+        /// | PowerBIDesktop |
+        /// | PowerBIModelingService |
+        /// | PbixInImportMode |
+        /// | PbixInDirectQueryMode |
+        /// | PbixInCompositeMode |
+        /// | InImportMode |
+        /// | InDirectQueryMode |
+        /// | InCompositeMode |
+        /// </param>
         /// <param name="description"> The dataset description. </param>
         /// <param name="upstreamDataflows"> The list of all the dataflows this item depends on. </param>
         /// <param name="tables"> The dataset tables. </param>

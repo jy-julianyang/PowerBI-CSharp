@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace Microsoft.PowerBI.Api.Models
 {
-    /// <summary> Non-fatal error codes that can occur during migration. </summary>
+    /// <summary> Non-fatal warning codes that may occur during migration. These indicate partial failures that don't prevent the overall operation from succeeding. </summary>
     public readonly partial struct SaveAsNativeDataflowErrorCode : IEquatable<SaveAsNativeDataflowErrorCode>
     {
         private readonly string _value;
